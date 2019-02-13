@@ -1,18 +1,30 @@
 <template>
-    <div id="plans-bca">
-        <div class="title font-sans text-grey-darkest">
-            <h1>Change Plan</h1>
+    <div>
+        <div class="title font-sans text-grey-darkest font-medium">
+            <p class="change-plan">Change Plan</p>
             <router-link to="/poststable">
-                <button class="text-grey-darkest cancel-plan hover:text-red">Cancel your Plan</button>
+                <button class="text-grey-darkest cancel-plan hover:text-red font-medium">Cancel your Plan</button>
             </router-link>
         </div>
     <hr>
     <li class="flex flex-row">
-        <hobby class="button w-32 text-grey-darkest text-center bg-white px-4 py-2 ml-2 mt-2 mb-6 rounded"></hobby>
-        <growth class="button w-32 text-grey-darkest text-center bg-white px-4 py-2 ml-2 mt-2 mb-6 rounded"></growth>
-        <bussiness class="button w-32  text-grey-darkest text-center bg-white px-4 py-2 ml-2 mt-2 mb-6 rounded"></bussiness>
-        <enterprise class="button w-32 text-grey-darkest text-center bg-white px-4 py-2 mt-2 ml-2 mb-6 rounded"></enterprise>
+        <hobby></hobby>
+        <growth></growth>
+        <bussiness></bussiness>
+        <enterprise></enterprise>
     </li>
+    <button
+      type="button"
+      class="border bg-grey-darkest hover:border-grey-darkest hover:bg-blue-lightest hover:text-grey-darkest text-white font-bold py-2 px-4 rounded ml-2"
+      @click="showModal"
+    >
+      Submit
+    </button>
+
+    <modal2
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
     </div>
 </template>
 
@@ -21,17 +33,41 @@ import Bussiness from '@/components/plans/Bussiness.vue'
 import Enterprise from '@/components/plans/Enterprise.vue'
 import Growth from '@/components/plans/Growth.vue'
 import Hobby from '@/components/plans/Hobby.vue'
+import modal2 from '@/components/PlanModal.vue'
 export default {
   components: {
     'bussiness': Bussiness,
     'enterprise': Enterprise,
     'growth': Growth,
-    'hobby': Hobby
+    'hobby': Hobby,
+    modal2
+  },
+  data () {
+    return {
+      isModalVisible: false
+    }
+  },
+  methods: {
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
+    },
+    init () {
+      this.$store.state.hobbySelected = false
+      this.$store.state.growthSelected = false
+      this.$store.state.enterpriseSelected = false
+      this.$store.state.bussinessSelected = false
+    }
+  },
+  created () {
+    this.init()
   }
 }
 </script>
 
-<style scoped>
+<style>
 .title {
     display: flex;
     justify-content: space-between;
@@ -51,14 +87,9 @@ hr {
 }
 .cancel-plan {
     font-size: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
-
-.button {
-    box-shadow: 0 9px #999;
-}
-.button:active {
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+.change-plan {
+  font-size: 30px;
 }
 </style>

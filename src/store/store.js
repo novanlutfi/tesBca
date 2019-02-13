@@ -31,23 +31,51 @@ export default new Vuex.Store({
         price: 20
       }
     ],
-    selectedPlan: {}
+    selectedPlan: {},
+    hobbySelected: false,
+    growthSelected: false,
+    bussinessSelected: false,
+    enterpriseSelected: false
   },
   mutations: {
-    postHobby (state, hobby) {
-      state.selectedPlan = hobby
+    selectHobby (state) {
+      state.hobbySelected = true
+      state.growthSelected = false
+      state.bussinessSelected = false
+      state.enterpriseSelected = false
+    },
+    selectGrowth (state) {
+      state.hobbySelected = false
+      state.growthSelected = true
+      state.bussinessSelected = false
+      state.enterpriseSelected = false
+    },
+    selectBussiness (state) {
+      state.hobbySelected = false
+      state.growthSelected = false
+      state.bussinessSelected = true
+      state.enterpriseSelected = false
+    },
+    selectEnterprise (state) {
+      state.hobbySelected = false
+      state.growthSelected = false
+      state.bussinessSelected = false
+      state.enterpriseSelected = true
+    },
+    postHobby (state) {
+      state.selectedPlan = state.planList[0]
       console.log(state.selectedPlan)
     },
-    postGrowth (state, growth) {
-      state.selectedPlan = growth
+    postGrowth (state) {
+      state.selectedPlan = state.planList[1]
       console.log(state.selectedPlan)
     },
-    postBussiness (state, bussiness) {
-      state.selectedPlan = bussiness
+    postBussiness (state) {
+      state.selectedPlan = state.planList[2]
       console.log(state.selectedPlan)
     },
-    postEnterprise (state, enterprise) {
-      state.selectedPlan = enterprise
+    postEnterprise (state) {
+      state.selectedPlan = state.planList[3]
       console.log(state.selectedPlan)
     }
   }

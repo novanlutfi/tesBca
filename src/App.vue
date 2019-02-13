@@ -17,6 +17,6 @@ h3, h4, h5 {
 }
 html {
   height: 100%;
-  background: #e8e8ec;
+  background: #efeff1;
 }
 </style>
