@@ -19,7 +19,7 @@
       </header>
       <section class="modal-body font-sans text-grey-darkest font-medium" id="modalDescription">
         <slot name="body">
-          Are you sure want to submit?
+          Are you sure want to delete?
         </slot>
        </section>
        <footer class="modal-footer">
