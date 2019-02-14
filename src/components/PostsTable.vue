@@ -18,6 +18,7 @@
         </th>
         <th scope="col">Body
         </th>
+        <th scope="col">#</th>
       </tr>
     </thead>
     <tbody>
@@ -30,21 +31,46 @@
         </td>
         <td>{{item.body}}
         </td>
+        <td>
+          <button
+      type="button"
+      class="border bg-black hover:border-grey-darkest hover:bg-blue-lightest hover:text-grey-darkest text-white font-bold py-2 px-4 rounded ml-2"
+      @click="showDeleteModal(item.id)"
+    >
+      Delete
+    </button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <deleteModal
+      v-show="isDeleteModalVisible"
+      @close="closeDeleteModal"
+    />
 </section>
 </template>
 
 <script>
+import DeleteModal from '@/components/DeleteModal.vue'
 import Axios from 'axios'
 export default {
+  components: {
+    'deleteModal': DeleteModal
+  },
   data () {
     return {
-      tabelList: []
+      tabelList: [],
+      isDeleteModalVisible: false
     }
   },
   methods: {
+    showDeleteModal (id) {
+      this.$store.commit('deleteId', id)
+      this.isDeleteModalVisible = true
+    },
+    closeDeleteModal () {
+      this.isDeleteModalVisible = false
+    },
     getData () {
       Axios.get('http://jsonplaceholder.typicode.com/posts').then(
         response => {
@@ -56,6 +82,11 @@ export default {
   },
   created () {
     this.getData()
+  },
+  computed: {
+    computedDelete: function () {
+      return this.$store.state.deletedId
+    }
   }
 }
 </script>
