@@ -66,14 +66,8 @@ export default {
       } else {
         alert('You haven\'t chosen plan')
       }
-      this.init()
+      this.$store.commit('initPlan')
       this.$emit('close')
-    },
-    init () {
-      this.$store.state.hobbySelected = false
-      this.$store.state.growthSelected = false
-      this.$store.state.enterpriseSelected = false
-      this.$store.state.bussinessSelected = false
     }
   }
 }

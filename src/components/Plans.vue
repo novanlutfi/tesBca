@@ -53,16 +53,10 @@ export default {
     },
     closeModal () {
       this.isModalVisible = false
-    },
-    init () {
-      this.$store.state.hobbySelected = false
-      this.$store.state.growthSelected = false
-      this.$store.state.enterpriseSelected = false
-      this.$store.state.bussinessSelected = false
     }
   },
   created () {
-    this.init()
+    this.$store.commit('initPlan')
   }
 }
 </script>

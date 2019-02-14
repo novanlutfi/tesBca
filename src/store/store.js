@@ -38,6 +38,12 @@ export default new Vuex.Store({
     enterpriseSelected: false
   },
   mutations: {
+    initPlan (state) {
+      state.hobbySelected = false
+      state.growthSelected = false
+      state.bussinessSelected = false
+      state.enterpriseSelected = false
+    },
     selectHobby (state) {
       state.hobbySelected = true
       state.growthSelected = false

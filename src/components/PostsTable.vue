@@ -18,10 +18,6 @@
         </th>
         <th scope="col">Body
         </th>
-        <th scope="col">#
-        </th>
-        <!-- <th scope="col">#
-        </th> -->
       </tr>
     </thead>
     <tbody>
@@ -34,16 +30,6 @@
         </td>
         <td>{{item.body}}
         </td>
-        <td>
-          <button v-on:click="deleteData(item.id)" class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded">
-            Delete
-          </button>
-        </td>
-        <!-- <td>
-          <button v-on:click="editData(item)" class="bg-green hover:bg-green-dark text-white font-bold py-2 px-4 rounded">
-            Edit
-          </button>
-        </td> -->
       </tr>
     </tbody>
   </table>
@@ -64,17 +50,6 @@ export default {
         response => {
           this.tabelList = response.data
           console.log(response.data)
-        }
-      )
-    },
-    deleteData (id) {
-      Axios.delete('http://jsonplaceholder.typicode.com/posts/' + id).then(
-        response => {
-          console.log('berhasil delete post ' + id)
-        }
-      ).catch(
-        error => {
-          console.log(error)
         }
       )
     }
