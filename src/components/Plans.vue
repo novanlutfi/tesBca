@@ -57,6 +57,9 @@ export default {
   },
   created () {
     this.$store.commit('initPlan')
+  },
+  destroyed () {
+    this.$store.commit('initPlan')
   }
 }
 </script>
