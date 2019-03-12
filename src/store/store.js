@@ -36,9 +36,18 @@ export default new Vuex.Store({
     growthSelected: false,
     bussinessSelected: false,
     enterpriseSelected: false,
-    deletedId: 0
+    deletedId: 0,
+    dataTemp: {},
+    isEditMode: false
   },
   mutations: {
+    editMode (state, editMode) {
+      state.isEditMode = editMode
+      console.log('edit mode di store' + state.isEditMode)
+    },
+    editData (state, item) {
+      state.dataTemp = item
+    },
     deleteId (state, id) {
       state.deletedId = id
     },

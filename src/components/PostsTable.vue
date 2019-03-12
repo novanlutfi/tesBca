@@ -6,11 +6,18 @@
   Change Plan
 </button>
     </router-link>
+    <button
+      type="button"
+      class="border bg-black hover:border-grey-darkest hover:bg-blue-lightest hover:text-grey-darkest text-white font-bold py-2 px-4 rounded ml-2"
+      @click="showAddModal"
+    >
+      Add
+    </button>
   </div>
     <table class="table">
     <thead class="bg-black text-white">
       <tr>
-        <th scope="col">Post ID
+        <th scope="col">User ID
         </th>
         <th scope="col">ID
         </th>
@@ -18,6 +25,7 @@
         </th>
         <th scope="col">Body
         </th>
+        <th scope="col">#</th>
         <th scope="col">#</th>
       </tr>
     </thead>
@@ -40,6 +48,17 @@
       Delete
     </button>
         </td>
+        <td>
+          <router-link to="/addeditform">
+          <button
+      type="button"
+      class="border bg-black hover:border-grey-darkest hover:bg-blue-lightest hover:text-grey-darkest text-white font-bold py-2 px-4 rounded ml-2"
+      @click="showEditModal(item)"
+    >
+      Edit
+    </button>
+          </router-link>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -47,23 +66,45 @@
       v-show="isDeleteModalVisible"
       @close="closeDeleteModal"
     />
+    <addEditModal
+      v-show="isAddEditModalVisible"
+      @close="closeAddEditModal"
+    />
 </section>
 </template>
 
 <script>
 import DeleteModal from '@/components/DeleteModal.vue'
+import AddEditModal from '@/components/AddEditModal.vue'
 import Axios from 'axios'
 export default {
   components: {
-    'deleteModal': DeleteModal
+    'deleteModal': DeleteModal,
+    'addEditModal': AddEditModal
   },
   data () {
     return {
       tabelList: [],
-      isDeleteModalVisible: false
+      isDeleteModalVisible: false,
+      isAddEditModalVisible: false
     }
   },
   methods: {
+    showEditModal (item) {
+      this.$store.commit('editData', item)
+      this.$store.commit('editMode', true)
+      // this.isAddEditModalVisible = true
+    },
+    showAddModal () {
+      this.$store.commit('editData', {})
+      this.$store.commit('editMode', false)
+      this.isAddEditModalVisible = true
+    },
+    closeAddEditModal () {
+      this.$store.commit('editData', {})
+      this.$store.commit('editMode', false)
+      this.isAddEditModalVisible = false
+    },
     showDeleteModal (id) {
       this.$store.commit('deleteId', id)
       this.isDeleteModalVisible = true
@@ -82,11 +123,6 @@ export default {
   },
   created () {
     this.getData()
-  },
-  computed: {
-    computedDelete: function () {
-      return this.$store.state.deletedId
-    }
   }
 }
 </script>

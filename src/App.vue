@@ -18,5 +18,6 @@ h3, h4, h5 {
 html {
   height: 100%;
   background: #efeff1;
+  /* background-image: url("/static/arsenal.ico") */
 }
 </style>
